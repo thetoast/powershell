@@ -162,11 +162,6 @@ Write-Host Creating custom drives... -foregroundcolor yellow
 
 Load-PSDrives
 
-
-# New-Drive sofodev c:\code\sofodev
-# New-Drive priv \\bling\users\ryanm\private
-# New-Drive pub \\bling\users\ryanm\public
-
 # END DRIVES }}}
 
 # SETTINGS {{{
@@ -177,10 +172,12 @@ Set-VsVars32 2010
 #  END SETTINGS }}}
 
 # SCRIPTS {{{
-Write-Host Loading scripts... -foregroundcolor yellow
-ls $scripts | % {
-    if ([io.Path]::GetExtension($_) -eq ".ps1") {
-        Load-Script $_.VersionInfo.FileName
+if ( Test-Path $scripts) {
+    Write-Host Loading scripts... -foregroundcolor yellow
+    ls $scripts | % {
+        if ([io.Path]::GetExtension($_) -eq ".ps1") {
+            Load-Script $_.VersionInfo.FileName
+        }
     }
 }
 # END SCRIPTS }}}
